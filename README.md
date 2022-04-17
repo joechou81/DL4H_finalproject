@@ -1,4 +1,4 @@
-# DL4H_finalproject
+# DL4H_Final Project
 
 This is a reproduction project of  "Junyi Gao, Cao Xiao, Yasha Wang, Wen Tang, Lucas MGlass, and Jimeng Sun. 2020. Stagenet: Stage-aware
 neural networks for health risk prediction. In Proceedings of The Web Conference 2020, pages 530–540."
