@@ -16,7 +16,9 @@ This project is accomplished by the following procedure:
    - test_listlife.csv
    - train_listlife.csv
 6. Train StageNet with 256 training samples using the following command:
-        python train.py --data_path='./data/' --file_name='trained_model' --small_part 1
+   ```
+   python train.py --data_path='./data/' --file_name='trained_model' --small_part 1
+   ```
    make sure that your current directory is in the StageNet folder.
 7. The lstm model can also be found in the benchmark folder (mimic3models/keras_models/lstm.py). The detailed steps is in https://github.com/YerevaNN/mimic3-benchmarks.
 8. Implementation of T-LSTM and ON-LSTM (uncomplete).
