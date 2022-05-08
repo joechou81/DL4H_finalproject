@@ -8,7 +8,7 @@ import random
 import matplotlib.pyplot as plt
 import matplotlib as mpl
 
-RANDOM_SEED = 12345
+RANDOM_SEED = 12345 #12345
 np.random.seed(RANDOM_SEED)
 random.seed(RANDOM_SEED)
 
@@ -28,8 +28,7 @@ from utils.readers import DecompensationReader
 from utils.preprocessing import Discretizer, Normalizer
 from utils import metrics
 from utils import common_utils
-from model import StageNet
-from tlstm import TimeLSTM
+from model import StageNet, StageNet_reduce1, StageNet_reduce2, StageNet_reduce3, LSTM, tLSTM, ON_LSTM
 
 def parse_arguments(parser):
     parser.add_argument('--test_mode', type=int, default=0, help='Test SA-CRNN on MIMIC-III dataset')
@@ -83,6 +82,7 @@ if __name__ == '__main__':
         print("available device: {}".format(device))
 
         model = StageNet(76+17, 384, 10, 1, 3, 0.3, 0.3, 0.3).to(device)
+        #model = StageNet_reduce1(76+17, 384, 10, 1, 3, 0.3, 0.3, 0.3).to(device)
         optimizer = torch.optim.Adam(model.parameters(), lr=args.lr)
         
         checkpoint = torch.load('./saved_weights/StageNet')
@@ -169,9 +169,13 @@ if __name__ == '__main__':
         device = torch.device("cuda:0" if torch.cuda.is_available() == True else 'cpu')
         print("available device: {}".format(device))
 
-        # model = StageNet(args.input_dim+17, args.rnn_dim, args.K, args.output_dim, args.chunk_level, args.dropconnect_rate, args.dropout_rate, args.dropres_rate).to(device)
-        
-        model = TimeLSTM(args.input_dim, 64)
+        model = StageNet(args.input_dim+17, args.rnn_dim, args.K, args.output_dim, args.chunk_level, args.dropconnect_rate, args.dropout_rate, args.dropres_rate).to(device)
+        #model = LSTM(args.input_dim+17, args.rnn_dim, args.K, args.output_dim, args.chunk_level, args.dropconnect_rate, args.dropout_rate, args.dropres_rate).to(device)
+        #model = StageNet_reduce1(args.input_dim+17, args.rnn_dim, args.K, args.output_dim, args.chunk_level, args.dropconnect_rate, args.dropout_rate, args.dropres_rate).to(device)
+        #model = StageNet_reduce2(args.input_dim+17, args.rnn_dim, args.K, args.output_dim, args.chunk_level, args.dropconnect_rate, args.dropout_rate, args.dropres_rate).to(device)
+        #model = StageNet_reduce3(args.input_dim+17, args.rnn_dim, args.K, args.output_dim, args.chunk_level, args.dropconnect_rate, args.dropout_rate, args.dropres_rate).to(device)
+        #model = tLSTM(args.input_dim+17, args.rnn_dim, args.K, args.output_dim, args.chunk_level, args.dropconnect_rate, args.dropout_rate, args.dropres_rate).to(device)
+        #model = ON_LSTM(args.input_dim+17, args.rnn_dim, args.K, args.output_dim, args.chunk_level, args.dropconnect_rate, args.dropout_rate, args.dropres_rate).to(device)
         optimizer = torch.optim.Adam(model.parameters(), lr=args.lr)
 
         '''Train phase'''
@@ -363,3 +367,4 @@ if __name__ == '__main__':
             test_pred = np.array(test_pred)
             test_pred = np.stack([1 - test_pred, test_pred], axis=1)
             test_ret = metrics.print_metrics_binary(test_true, test_pred)
+            print('on_lstm')
