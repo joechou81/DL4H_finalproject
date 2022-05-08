@@ -20,8 +20,6 @@ This project is accomplished by the following procedure:
    python train.py --data_path='./data/' --file_name='trained_model' --small_part 1
    ```
    make sure that your current directory is in the StageNet folder.
-7. The lstm model can also be found in the benchmark folder (mimic3models/keras_models/lstm.py). The detailed steps is in https://github.com/YerevaNN/mimic3-benchmarks.
-8. Implementation of T-LSTM and ON-LSTM (uncomplete).
-9. Implementation of two reduced StageNets as mentioned in the paper(uncomplete).
-10. Compare accuracy of LSTM, T-LSTM, ON-LSTM, StageNet, Reduced StageNet(uncomplete).
-11. Finetune hyperparameters of StageNet.
+7. StageNet, LSTM, T-LSTM, ON-LSTM, and 4 types of reduced model are implemented in model.py. By swithching the comment in Line 172 - 178 in train.py, different model can be trained. 
+
+8. 
