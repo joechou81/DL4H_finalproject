@@ -22,4 +22,8 @@ This project is accomplished by the following procedure:
    make sure that your current directory is in the StageNet folder.
 7. StageNet, LSTM, T-LSTM, ON-LSTM, and 4 types of reduced model are implemented in model.py. By swithching the comment in Line 172 - 178 in train.py, different model can be trained. 
 
-8. 
+8. losstrain.xls contains all the results (i.e., learning curves, test accuracy). Investigation including learning rates, size of training samples, batch sizes, pre-trained model, and different random seed. Moreover, 4 types of reduced model are also provided: StageNet-I to StageNet-IV. Breif description of each model are as follows.
+  - StageNet-I: Regular LSTM and the stage-adaptive convolutional module. Regular convolutional operation was employed (Gao et al. 2020).
+  - StageNet-II: Stage-aware LSTM only (Gao et al. 2020).
+  - StageNet-III: During Re-calibrating, only a fully-connected layer and a sigmoid activation function is used.
+  - StageNet-IV: Stage-aware LSTM with regular convolutional module without reweighting.
